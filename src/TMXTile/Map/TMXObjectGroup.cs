@@ -23,9 +23,23 @@ namespace TMXTile
         public string Name { get; set; }
         [XmlElement(ElementName = "object")]
         public List<TMXObject> Objects { get; set; }
-        [XmlAttribute(AttributeName = "visible")]
+
+        [XmlIgnore()]
         public bool Visible { get; set; }
-        [XmlAttribute(AttributeName = "locked")]
+
+        [XmlAttribute(AttributeName = "visible")]
+        internal int VisibleAsInt {
+            get => (Visible ? 1 : 0);
+            set => Visible = value == 1;
+        }
+
+        [XmlIgnore()]
         public bool Locked { get; set; }
+
+        [XmlAttribute(AttributeName = "locked")]
+        internal int LockedAsInt {
+            get => (Locked ? 1 : 0);
+            set => Locked = value == 1;
+        }        
     }
 }
